@@ -10,14 +10,6 @@ import (
 	"strconv"
 )
 
-func Reverse(s string) string {
-	r := []rune(s)
-	for i, j := 0, len(r)-1; i < len(r)/2; i, j = i+1, j-1 {
-		r[i], r[j] = r[j], r[i]
-	}
-	return string(r)
-}
-
 func uintGen(min, max uint64) {
 	for i := min; ; i++ {
 		h := strconv.FormatUint(i, 16)
@@ -37,7 +29,7 @@ func uintGen(min, max uint64) {
 		}
 
 		hash := sha256.Sum256([]byte(dst))
-		fmt.Println(Reverse(base64.StdEncoding.EncodeToString(hash[:])))
+		fmt.Println(base64.StdEncoding.EncodeToString(hash[:]), h)
 
 		if i >= max {
 			break
@@ -64,7 +56,7 @@ func bigIntGen(min, max *big.Int) {
 		}
 
 		hash := sha256.Sum256([]byte(dst))
-		fmt.Println(Reverse(base64.StdEncoding.EncodeToString(hash[:])))
+		fmt.Println(base64.StdEncoding.EncodeToString(hash[:]), h)
 
 	}
 }
