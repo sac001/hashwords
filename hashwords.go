@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"math/big"
 	"os"
+	"time"
 )
 
 func main() {
@@ -27,9 +28,11 @@ func main() {
 		fmt.Println("The end number must be greater than the start number.")
 		os.Exit(1)
 	}
+	startTime := time.Now()
 	for i := new(big.Int).Set(start); i.Cmp(end) <= 0; i.Add(i, big.NewInt(1)) {
 		hash := sha256.Sum256(i.Bytes())
 		hashString := base64.StdEncoding.EncodeToString(hash[:])
-		fmt.Printf("%s : %v\n", hashString, i)
+		elapsed := time.Since(startTime)
+		fmt.Printf("%s : %v, elapsed time: %v\n", hashString, i, elapsed)
 	}
 }
